@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class levelModel extends Model
 {
     use HasFactory;
-    protected $table = 'm_user';
-    protected $primaryKey = 'user_id';
+    protected $table = 'm_level';
+    protected $primaryKey = 'level_id';
 
     protected $fillable = ['level_id', 'username', 'nama', 'password'];
     public function level(): BelongsTo

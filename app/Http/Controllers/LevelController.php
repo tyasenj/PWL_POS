@@ -14,6 +14,9 @@ class LevelController extends Controller
     public function index(LevelDataTable $dataTable)
     {
         return $dataTable->render('level.index');
+        //SOAL NO 1
+        //$data = DB::select('select * from m_level');
+        //return view('level', ['data' => $data]);
     }
     public function tambah()
     {
@@ -28,6 +31,6 @@ class LevelController extends Controller
         ]);
         //store
         levelModel::create($validated);
-        return redirect('/kategori');
+        return redirect('/level'); //!!!
     }
 }
