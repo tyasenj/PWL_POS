@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserModel;
+use Exeception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,6 +24,14 @@ class UserController extends Controller
 
     public function tambah_simpan(Request $request)
     {
+        //validasi - JS 6 - C. FORM REQUEST VALIDATION
+        $validated = $request->validate([
+            'username' => 'bail|required|unique:m_kategori|max:255',
+            'nama' => 'required',
+            'password' => 'required',
+            'level_id' => 'required',
+        ]);
+
         UserModel::create([
             'username' => $request->username,
             'nama' => $request->nama,

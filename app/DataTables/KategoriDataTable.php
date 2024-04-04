@@ -19,14 +19,16 @@ class KategoriDataTable extends DataTable
      *
      * @param QueryBuilder $query Results from query() method.
      */
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            /*           ->addColumn('action', 'kategori.action') */
-            /*  Soal no 3 & 4 - JOBSHEET 5 */
             ->addColumn('action', function ($row) {
-                return '<a href="/PWL_POS/public/kategori/edit/' . $row->kategori_id . '" class="btn btn-primary">Edit</a> 
-                        <a href="/PWL_POS/public/kategori/delete/' . $row->kategori_id . '" class="btn btn-primary">Delete</a>';
+                return '<a href="/PWL_POS/public/kategori/edit/' . $row->kategori_id . '
+                       " class="btn btn-primary">Edit</a> 
+                       
+                       <a href="/PWL_POS/public/kategori/delete/' . $row->kategori_id . '
+                       " class="btn btn-primary">Delete</a>';
             })
             ->setRowId('id');
     }
@@ -34,6 +36,7 @@ class KategoriDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
+
     public function query(KategoriModel $model): QueryBuilder
     {
         return $model->newQuery();
@@ -42,6 +45,7 @@ class KategoriDataTable extends DataTable
     /**
      * Optional method if you want to use the html builder.
      */
+
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -58,7 +62,6 @@ class KategoriDataTable extends DataTable
                 Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload'),
-                //soal no 1 - JOBSHEET 5
                 Button::make('add')
             ]);
     }
@@ -66,20 +69,15 @@ class KategoriDataTable extends DataTable
     /**
      * Get the dataTable columns definition.
      */
+
     public function getColumns(): array
     {
         return [
-            /*       Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'), */
             Column::make('kategori_id'),
             Column::make('kategori_kode'),
             Column::make('kategori_nama'),
             Column::make('created_at'),
             Column::make('updated_at'),
-            //Menampilkan kolom action edit dan delete - soal no 3 & 4 - JOBSHEET 5
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -91,6 +89,7 @@ class KategoriDataTable extends DataTable
     /**
      * Get the filename for export.
      */
+
     protected function filename(): string
     {
         return 'Kategori_' . date('YmdHis');

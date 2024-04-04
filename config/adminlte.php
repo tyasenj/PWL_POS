@@ -322,6 +322,12 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
+        //soal no 2 - JOBSHEET 5
+        [
+            'text' => 'Kategori',
+            'url' => 'kategori',
+            'icon' => 'fas fa-fw fa-list-alt',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
