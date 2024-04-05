@@ -5,7 +5,7 @@
     <div class="card-header">
         <h3 class="card=title">{{$page->title}}</h3>
         <div class="card-tools">
-            <a href="{{url('level/create')}}" class="btn btn-sm btn-primary mt-1">Tambah</a>
+            {{-- <a href="{{url('stok/create')}}" class="btn btn-sm btn-primary mt-1">Tambah</a> --}}
         </div>
     </div>
     <div class="card-body">
@@ -20,23 +20,25 @@
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Filter:</label>
                     <div class="col-3">
-                        <select name="level_id" id="level_id" class="form-control" required>
+                        <select name="barang_id" id="barang_id" class="form-control" required>
                             <option value="">- Semua -</option>
-                            @foreach($level as $item)
-                                <option value="{{$item->level_id}}">{{$item->level_nama}}</option>
+                            @foreach($barang as $item)
+                                <option value="{{$item->barang_id}}">{{$item->barang_nama}}</option>
                             @endforeach
                         </select>
-                        <small class="form-text text-muted">Level</small>
+                        <small class="form-text text-muted">Stok Barang</small>
                     </div>
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-striped table-hover table-sm" id="table_level">
+        <table class="table table-bordered table-striped table-hover table-sm" id="table_stok">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Level Kode</th>
-                    <th>Nama Level</th>
+                    <th>Nama Barang</th>
+                    <th>Nama Staff</th>
+                    <th>Tanggal</th>
+                    <th>Jumlah</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -51,14 +53,14 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            var dataLevel = $('#table_level').DataTable({
+            var dataStok = $('#table_stok').DataTable({
             serverSide: true, // serverSide: true, jika ingin menggunakan server side processing
             ajax: {
-                "url": "{{ url('level/list') }}",
+                "url": "{{ url('stok/list') }}",
                 "dataType": "json",
                 "type": "POST",
                 "data":function(d){
-                    d.level_id = $('#level_id').val();
+                    d.barang_id = $('#barang_id').val();
                 }
             },
             columns: [
@@ -68,26 +70,35 @@
                     orderable: false,
                     searchable: false
                     },{
-                    data: "level_kode", 
+                    data: "barang.barang_nama", 
                     className: "",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                     },{
-                    data: "level_nama", 
+                    data: "user.username", 
                     className: "",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                     },{
+                    data: "stok_tanggal", 
+                    className: "",
+                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                    searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                    },{
+                    data: "stok_jumlah", 
+                    className: "",
+                    orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                    searchable: false // searchable: true, jika ingin kolom ini bisa dicari
+                    },{    
                     data: "aksi", 
                     className: "",
                     orderable: false, // orderable: true, jika ingin kolom ini bisa  diurutkan
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
-
                     }
                 ]
             });
-            $('#level_id').on('change',function(){
-                dataLevel.ajax.reload();
+            $('#barang_id').on('change',function(){
+                dataStok.ajax.reload();
             })
         });
     </script>
