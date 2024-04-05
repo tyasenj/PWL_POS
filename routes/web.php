@@ -5,6 +5,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,19 @@ Route::get('/level/tambah_simpan', [LevelController::class, 'tambah_simpan'])->n
 Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan'])->name('user.tambah_simpan');
 Route::post('/level/tambah_simpan', [LevelController::class, 'tambah_simpan'])->name('level.tambah_simpan');
 Route::resource('m_user', POSController::class);
+/* ----------------------------------
+             JOBSHEET 7
+------------------------------------*/
+Route::get('/', [welcomeController::class, 'index']);
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', [UserController::class, 'index']);          //Menampilkan halaman awal user
+    Route::post('/list', [UserController::class, 'list']);      //Menampilkan data user dalam bentuk join untuk datatables
+    Route::get('/create', [UserController::class, 'create']);   //Menampilkan halaman form tambah user
+    Route::post('/', [UserController::class, 'store']);         //Menyimpan data user baru
+    Route::get('/{id}', [UserController::class, 'show']);       //Menampilkan detail user
+    Route::get('/{id}/edit', [UserController::class, 'edit']);  //Menampilkan halaman form edit user
+    Route::put('/{id}', [UserController::class, 'update']);     //Menyimpan perubahan data user
+    Route::delete('/{id}', [UserController::class, 'destroy']); //Menghapus data user
+
+});
