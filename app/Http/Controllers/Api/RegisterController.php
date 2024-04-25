@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function __invoke(Request $request)
+    public  function __invoke(Request $request)
     {
         //set validation
         $validator = Validator::make($request->all(), [
@@ -19,7 +19,7 @@ class RegisterController extends Controller
             'level_id' => 'required'
         ]);
 
-        //set validations fails
+        //if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'username' => $request->username,
             'nama' => $request->nama,
             'password' => bcrypt($request->password),
-            'level_id' => $request->level_id,
+            'level_id' => $request->level_id
         ]);
 
         //return response JSON user is created
