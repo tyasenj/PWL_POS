@@ -11,6 +11,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ManagerController;
 use App\Models\User;
 
@@ -154,3 +155,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('manager', ManagerController::class);
     });
 });
+
+/*-----------------------------------
+            JOBSHEET 12
+-----------------------------------*/
+Route::get('/file-upload', [FileUploadController::class, 'fileUpload']);
+Route::post('/file-upload', [FileUploadController::class, 'prosesfileUpload']);

@@ -23,7 +23,7 @@ class TransaksiModel extends Model
         'barang_id',
         'harga',
         'jumlah',
-        'image'
+        // 'image'
     ];
 
     public function penjualan(): BelongsTo

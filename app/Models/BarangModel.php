@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BarangModel extends Model
 {
@@ -27,6 +28,11 @@ class BarangModel extends Model
     public function kategori(): BelongsTo
     {
         return $this->belongsTo(KategoriModel::class, 'kategori_id', 'kategori_id');
+    }
+
+    public function stok(): HasMany
+    {
+        return $this->hasMany(StokModel::class, 'barang_id', 'barang_id');
     }
 
     protected function image(): Attribute
