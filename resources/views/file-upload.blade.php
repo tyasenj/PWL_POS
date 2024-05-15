@@ -22,10 +22,18 @@
             @csrf
             
             <div class="mb-3">
+                <label for="nama_file" class="form-label">Nama Gambar</label>
+                <input type="text" class="form-control" id="nama_file" name="nama_file" required>
+                @error('nama_file')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
                 <label for="berkas" class="form-label">Gambar Profile</label>
-                <input type="file" class="form-control" id="berkas" name="berkas">
+                <input type="file" class="form-control" id="berkas" name="berkas" required>
                 @error('berkas')
-                    <div class="text-danger">{{$message}}</div>
+                    <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
     

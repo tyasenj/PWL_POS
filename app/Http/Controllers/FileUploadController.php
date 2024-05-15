@@ -13,28 +13,20 @@ class FileUploadController extends Controller
 
     public function prosesFileUpload(Request $request)
     {
-        //dump($request->berkas);
-        //return "Pemrosesan file upload di sini";
+
         $request->validate([
             'berkas' => 'required|file|image|max:500',
+            'nama_file' => 'required|string|max:255'
         ]);
-        //$path = $request->berkas->store('uploads');
-        //$namaFile = $request->berkas->getClientOriginalName();
-        //$path = $request->berkas->storeAs('uploads', $namaFile );
 
-        $extfile = $request->berkas->getClientOriginalName();
+        $originalFileName = $request->file('berkas')->getClientOriginalName();
+        $extfile = $request->file('berkas')->getClientOriginalExtension();
         $namaFile = 'web-' . time() . "." . $extfile;
-        //$path = $request->berkas->storeAs('public', $namaFile); //gambar disimpan di public
 
-        $path = $request->berkas->move('gambar', $namaFile);
-        $path = str_replace("\\", "//", $path);
-        echo "variabel path berisi: $path <br>";
+        $path = $request->file('berkas')->move('gambar', $namaFile);
+        $path = str_replace("\\", "/", $path);
 
-        //$pathBaru = asset('storage/' . $namaFile);
         $pathBaru = asset('gambar/' . $namaFile);
-        echo "proses upload berhasil, file berada di: $path";
-        echo "<br>";
-        echo "Tampilkan link:<a href='$pathBaru'>$pathBaru</a>";
-        //echo $request->berkas->getClientOriginalName() . " lolos validasi";
+        return view('file-upload-result', compact('path', 'pathBaru', 'originalFileName'));
     }
 }
